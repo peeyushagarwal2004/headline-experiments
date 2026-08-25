@@ -29,6 +29,10 @@ not care.
 
 ## Result
 
+These findings also appear on a
+**[live dashboard](https://claude.ai/code/artifact/91ce7e6b-934d-47a3-b987-70704851922b)**
+alongside the sequential-testing study they were built with.
+
 ![Significance sweep](reports/figures/significance_sweep.png)
 
 | p < | pairs | hand-built features | TF-IDF word+bigram | shuffled control |
