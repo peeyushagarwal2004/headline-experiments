@@ -1,0 +1,13 @@
+{
+  "model": "distilbert-base-uncased",
+  "threshold": 0.01,
+  "epochs": 4,
+  "n_pairs": 3467,
+  "n_test_pairs": 690,
+  "test_accuracy": 0.7058,
+  "test_logloss": 0.6432,
+  "baseline_tfidf": 0.6726,
+  "baseline_heuristic": 0.6265,
+  "eval_protocol": "single grouped 60/20/20 train/val/test split by experiment; accuracy on the 690-pair held-out test set. TF-IDF/heuristic baselines are 5-fold GroupKFold out-of-fold over all filtered pairs.",
+  "verdict": "transformer beats TF-IDF by +0.0332 on the held-out test set"
+}

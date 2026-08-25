@@ -48,6 +48,15 @@ the hand-built features climb 0.556 → 0.634. The intervals at the two ends do
 not overlap. Shuffled-label controls sit at ~0.50 throughout, which is what
 says the grouped splits are not leaking.
 
+A fine-tuned **DistilBERT cross-encoder** at p < 0.01 reaches **0.706 accuracy**
+(log-loss 0.643) on a held-out set of 690 experiments, beating the TF-IDF
+baseline of 0.673 by **+3.3 points**. So the transformer does add signal over
+n-grams — but modestly, which is the honest read for headlines this short: most
+of the learnable signal is already in the word and bigram counts. (The
+transformer figure is from a single grouped 60/20/20 split; the baselines are
+5-fold cross-validated, so a fully matched comparison would re-run the
+transformer under the same CV.)
+
 The corollary matters for anyone reading a headline-prediction result: **an
 unfiltered accuracy of 0.575 and a filtered accuracy of 0.696 are the same
 model.** Quoting either number without the filter is meaningless, and a
@@ -151,12 +160,13 @@ transformer tracks the significance sweep.
 
 ## Status and limits
 
-- **`02_finetune_transformer.py` has not been run.** It needs `torch` and
-  `transformers` and realistically a GPU. Every number in this README comes
-  from the heuristic and TF-IDF baselines, which were run. The script feeds
-  each pair in both orderings with flipped labels, since a transformer has no
-  structural reason to be antisymmetric and will learn a position bias without
-  it — but it is the next step, not a reported result.
+- **The DistilBERT result (0.706) is from a single grouped train/val/test
+  split**, while the TF-IDF and heuristic baselines are 5-fold cross-validated.
+  The comparison is directionally sound — the transformer trains on the same
+  filtered pairs and is scored on experiments it never saw — but a fully matched
+  comparison would run the transformer under the same 5-fold CV. On a 690-pair
+  test set the standard error on accuracy is ~1.7 points, so +3.3 is real but
+  not overwhelming.
 - This uses the **exploratory** release (22,666 packages, 4,873 experiments,
   81M impressions). The confirmatory half requires a pre-registered analysis
   plan, which is exactly the right gate for a dataset this easy to fish in.
