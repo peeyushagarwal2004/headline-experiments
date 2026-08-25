@@ -1,0 +1,11 @@
+numpy>=1.26
+pandas>=2.0
+scipy>=1.11
+matplotlib>=3.8
+scikit-learn>=1.3
+statsmodels>=0.14
+pytest>=7.0
+
+# For scripts/02_finetune_transformer.py only (not run in this repo):
+# torch>=2.0
+# transformers>=4.40
