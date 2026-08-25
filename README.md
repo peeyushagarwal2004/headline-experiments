@@ -131,6 +131,24 @@ python -m pytest tests/ -q
 python scripts/01_significance_sweep.py
 ```
 
+## Run on GPU (Google Colab / Kaggle)
+
+The transformer fine-tune needs a GPU. In Colab, set **Runtime → Change runtime
+type → GPU (T4)**, then run one cell:
+
+```python
+!git clone https://github.com/peeyushagarwal2004/headline-experiments.git
+%cd headline-experiments
+!pip install -q transformers   # torch and scikit-learn are preinstalled on Colab
+!python scripts/02_finetune_transformer.py --threshold 0.01 --epochs 4
+```
+
+The archive downloads itself, the same-image pairs are rebuilt with the tested
+`hx/` code, and DistilBERT trains as a cross-encoder (~5 min on a T4). It prints
+a results block with test accuracy, log-loss, and the TF-IDF baseline at the
+same threshold for direct comparison. Run `--threshold 0.05` too to see how the
+transformer tracks the significance sweep.
+
 ## Status and limits
 
 - **`02_finetune_transformer.py` has not been run.** It needs `torch` and
